@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/symbols")
@@ -23,7 +25,7 @@ public class SymbolController {
     }
 
     @GetMapping("/convert")
-    public Mono<String> fullNameToSymbol(@RequestParam String fullName){
+    public Mono<String> fullNameToSymbol(@RequestParam List<String> fullName){
         return SymbolService.fullNameToSymbol(fullName);
 
     }

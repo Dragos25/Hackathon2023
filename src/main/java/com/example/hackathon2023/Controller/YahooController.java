@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/yahoo")
 @RequiredArgsConstructor
@@ -17,14 +19,16 @@ public class YahooController {
     YahooFinanceService yahooFinanceService;
     @Autowired
     SymbolService symbolService;
-    @GetMapping
-    public Mono<YahooFinanceObject> getYahooData(@RequestBody YahooRequest yahooRequest){
-        String fullname = yahooRequest.getFullName();
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping
+    public Mono<YahooFinanceObject> getYahooData(@RequestBody YahooRequest yahooRequest) {
+        List<String> fullname = yahooRequest.getFullName();
         Mono<String> symbol = symbolService.fullNameToSymbol(fullname);
-        return symbol.flatMap(
-                p->{
-                    yahooRequest.setFullName(p);
-                return yahooFinanceService.getYahooFinanceResponse(yahooRequest);
-        });
+//        return symbol.flatMap(
+//                p->{
+//                    yahooRequest.setFullName(p);
+        return yahooFinanceService.getYahooFinanceResponse(yahooRequest, symbol.block());
     }
 }
+
