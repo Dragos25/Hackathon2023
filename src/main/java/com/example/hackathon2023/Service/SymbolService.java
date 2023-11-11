@@ -11,21 +11,27 @@ import reactor.core.publisher.Mono;
 
 import javax.swing.plaf.synth.SynthButtonUI;
 
+import java.util.List;
+
 import static reactor.core.publisher.Mono.just;
 
 @Service
 @RequiredArgsConstructor
 public class SymbolService {
-    public Mono<DataClass> getSymbols(){
+    public Mono<DataClass> getSymbols() {
         return SymbolClient.getResponse();
     }
-    public static Mono<String> fullNameToSymbol(String fullname){
+
+    public static Mono<String> fullNameToSymbol(List<String> fullnames) {
         DataClass allList = SingletonDataClass.get();
-        for(SymbolsRequest symbolsRequest: allList.getSymbolsRequests()){
-            for(Quotes quotes:symbolsRequest.getQuotes())
-                if(quotes.getLongName().equals(fullname))
-                    return just(quotes.getSymbol());
+        for (String fullname : fullnames) {
+            for (SymbolsRequest symbolsRequest : allList.getSymbolsRequests()) {
+                for (Quotes quotes : symbolsRequest.getQuotes())
+                    if (quotes.getLongName().equals(fullname))
+                        return just(quotes.getSymbol());
+            }
         }
-       return Mono.empty();
+        return Mono.empty();
     }
+
 }

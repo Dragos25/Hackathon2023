@@ -12,9 +12,9 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class YahooFinanceService {
     //YahooClient yahooClient;
-    public Mono<YahooFinanceObject> getYahooFinanceResponse(YahooRequest yahooRequest){
+    public Mono<YahooFinanceObject> getYahooFinanceResponse(YahooRequest yahooRequest, String symbol){
         return YahooClient.getResponse(
-                yahooRequest.getFullName(),
+                symbol,
                 yahooRequest.getPeriod1(),
                 yahooRequest.getPeriod2(),
                 yahooRequest.getInterval());
