@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 public class YahooRequest {
-    String symbol;
+    String fullName;
     Long period1;
     Long period2;
     String interval;

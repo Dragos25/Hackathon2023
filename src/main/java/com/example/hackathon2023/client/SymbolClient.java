@@ -1,7 +1,6 @@
 package com.example.hackathon2023.client;
 
 import com.example.hackathon2023.model.Symbols.DataClass;
-import com.example.hackathon2023.model.YahooFinance.YahooFinanceObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;

@@ -14,7 +14,7 @@ public class YahooFinanceService {
     //YahooClient yahooClient;
     public Mono<YahooFinanceObject> getYahooFinanceResponse(YahooRequest yahooRequest){
         return YahooClient.getResponse(
-                yahooRequest.getSymbol(),
+                yahooRequest.getFullName(),
                 yahooRequest.getPeriod1(),
                 yahooRequest.getPeriod2(),
                 yahooRequest.getInterval());

@@ -1,5 +1,6 @@
 package com.example.hackathon2023.Controller;
 
+import com.example.hackathon2023.Service.SymbolService;
 import com.example.hackathon2023.Service.YahooFinanceService;
 import com.example.hackathon2023.model.YahooFinance.YahooFinanceObject;
 import com.example.hackathon2023.model.YahooFinance.YahooRequest;
@@ -14,8 +15,16 @@ import reactor.core.publisher.Mono;
 public class YahooController {
     @Autowired
     YahooFinanceService yahooFinanceService;
+    @Autowired
+    SymbolService symbolService;
     @GetMapping
     public Mono<YahooFinanceObject> getYahooData(@RequestBody YahooRequest yahooRequest){
-        return yahooFinanceService.getYahooFinanceResponse(yahooRequest);
+        String fullname = yahooRequest.getFullName();
+        Mono<String> symbol = symbolService.fullNameToSymbol(fullname);
+        return symbol.flatMap(
+                p->{
+                    yahooRequest.setFullName(p);
+                return yahooFinanceService.getYahooFinanceResponse(yahooRequest);
+        });
     }
 }
