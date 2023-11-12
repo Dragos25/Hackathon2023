@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class VeridionService {
-    List<String> baseWordsAscending = List.of("machine-learning", "java", "ai", "cybersecurity", "plesk", "plm", "python", "blockchain", "pdf", "data");
+    List<String> baseWordsAscending = List.of("machine-learning", "java", "ai", "cybersecurity", "plesk", "plm", "python", "blockchain", "pdf", "data", "artificial intelligence", "Intelligence");
     List<String> baseWordsDescending = List.of("fullstack","web-based" , ".net", "educational-tech", "tech-bubble", "cybersecurity",
             "social-media", "domain-hosting", "search-engine", "accessibility solutions",
             "music industry", "traditional-gaming", "app-innovation",  "blogging", "multi-function");
