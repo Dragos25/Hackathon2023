@@ -1,11 +1,15 @@
 package com.example.hackathon2023.client;
 
 import com.example.hackathon2023.model.Symbols.DataClass;
+import com.example.hackathon2023.model.YahooFinance.YahooFinanceObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class SymbolClient {
@@ -33,5 +37,6 @@ public class SymbolClient {
                 .retrieve();
         return responseSpec.bodyToMono(DataClass.class);
     }
+
 
 }

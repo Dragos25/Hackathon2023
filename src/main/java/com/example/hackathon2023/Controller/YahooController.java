@@ -25,10 +25,12 @@ public class YahooController {
     public Mono<YahooFinanceObject> getYahooData(@RequestBody YahooRequest yahooRequest) {
         List<String> fullname = yahooRequest.getFullName();
         Mono<String> symbol = symbolService.fullNameToSymbol(fullname);
-//        return symbol.flatMap(
-//                p->{
-//                    yahooRequest.setFullName(p);
         return yahooFinanceService.getYahooFinanceResponse(yahooRequest, symbol.block());
+    }
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/calculate")
+    public Mono<Double> calculateScore(@RequestBody YahooRequest yahooRequest) {
+        return symbolService.calculateScore(yahooRequest);
     }
 }
 
